@@ -49,7 +49,10 @@ public class ConnectionSendingHandler extends Thread{
 		
 		while(true) {
 			try {
+				baOut = new ByteArrayOutputStream();
+				objOut = new ObjectOutputStream(baOut);
 				objOut.writeObject(input.getKeys());
+				data = null;
 				data = baOut.toByteArray();
 				packet = new DatagramPacket(data, data.length, inet, port);
 				socket.send(packet);

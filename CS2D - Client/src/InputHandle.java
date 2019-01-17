@@ -4,6 +4,7 @@ import java.awt.event.KeyListener;
 public class InputHandle implements KeyListener{
 
 	private boolean[] Keys = new boolean[8];
+	private boolean active = false;
 
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_W) {
@@ -69,6 +70,15 @@ public class InputHandle implements KeyListener{
 	public boolean[] getKeys() {
 		return Keys;
 	}
+	
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+	
 	
 	
 	

@@ -1,22 +1,25 @@
 
 public class Main {
 	
-  private static Renderer render;
-  private static GameState gamestate;
-  private static InputHandle input;
-  private static Map map;
+	private static Renderer render;
+  	private static GameState gamestate;
+  	private static InputHandle input;
+  	private static Map map;
+  	private static ConnectionHandler conn;
 
   
 	
 	public static void main(String[] args) {
 		//Create input handle and give it to gamestate constuctor as arg
 		input = new InputHandle();
-		map = new Map();
-		map.loadMap();
 		gamestate = new GameState(input, map);
 		render = new Renderer(gamestate, input, map);
-		gamestate.addPlayer(new Player(200,200,25,1,1));
-		render.run();
+		conn = new ConnectionHandler("10.2.23.137", 61447, input);
+		System.out.println("threads running");
+		conn.start();
+		System.out.println("threads running");
+		render.start();
+;
 	}
 	
 	public static void setGameState(GameState argGameState) {

@@ -23,6 +23,7 @@ public class ConnectionReceiveHandler extends Thread{
 			packet = new DatagramPacket(bytes, bytes.length);
 			try {
 				socket.receive(packet);
+				System.out.println("packet received");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

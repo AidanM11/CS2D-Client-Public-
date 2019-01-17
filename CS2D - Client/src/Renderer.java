@@ -25,7 +25,6 @@ public class Renderer extends Thread {
 		while(true) {
 			
 			panel.repaint();
-			gamestate.update();
 			
 			
 			try {

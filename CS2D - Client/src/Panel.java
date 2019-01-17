@@ -33,7 +33,7 @@ public class Panel extends JPanel{
 	public void paintComponent(Graphics g) {
 		g.clearRect(0, 0, getWidth(), getHeight());
 		
-		drawMap(g, map);
+		drawMap(g, gamestate.getMap());
 		
 		for(int i = 0; i < gamestate.getPlayers().size(); i++) {
 			drawPlayer(g, gamestate.getPlayers().get(i));

@@ -122,7 +122,12 @@ public class GameState implements Serializable {
 		this.players = gs.players;
 		this.bullets = gs.bullets;
 		this.map = gs.map;
+		System.out.println("Gamestate updated");
 	}
+	public Map getMap() {
+		return map;
+	}
+	
 	
 	
 	

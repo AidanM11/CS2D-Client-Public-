@@ -6,11 +6,13 @@ public class ConnectionHandler extends Thread{
 	private int port;
 	private DatagramSocket socket;
 	private ConnectionSendingHandler connSend;
+	private ConnectionReceiveHandler connRec;
 	private InputHandle input;
 	public ConnectionHandler(String remoteHost, int port, InputHandle input) {
 		super();
 		this.remoteHost = remoteHost;
 		this.port = port;
+		this.input = input;
 	}
 	
 	public void run() {
@@ -21,6 +23,9 @@ public class ConnectionHandler extends Thread{
 			e.printStackTrace();
 		}
 		connSend = new ConnectionSendingHandler(socket, port, input);
+		connRec = new ConnectionReceiveHandler(socket);
+		connSend.start();
+		connRec.start();
 		
 	}
 	
