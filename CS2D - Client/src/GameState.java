@@ -1,8 +1,9 @@
 import java.io.Serializable;
+import java.net.SocketAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
 public class GameState implements Serializable {
 
-	private InputHandle input;
 	private ArrayList<Player> players;
 	private ArrayList<Bullet> bullets;
 	private Map map;
@@ -12,26 +13,23 @@ public class GameState implements Serializable {
 	
 
 	
-	public GameState(InputHandle input, Map map) {
+	public GameState(Map map) {
 		super();
-		this.input = input;
 		this.players = new ArrayList<Player>();
 		this.bullets = new ArrayList<Bullet>();
 		this.map = map;
 		
 		
 	}
-	public void update() {
+	public void update(HashMap<SocketAddress, boolean[]> keys) {
 		
-	
-
-	
-		
-			Player p = getPlayers().get(0);
+		for(int i = 0; i < this.players.size(); i++) {
+			Player p = getPlayers().get(i);
 			Player p1;
+			boolean[] currKeys = keys.get(p.getAddress());
 			int pY = getPlayers().get(0).getY();
 			int pX = getPlayers().get(0).getX();
-			if(input.getKeys()[0] == true) {
+			if(currKeys[0] == true) {
 				p1 = new Player(p);
 				p1.setY(pY - 4);
 				p1.setPlayerHitbox();
@@ -41,7 +39,7 @@ public class GameState implements Serializable {
 				
 			
 			}
-			if(input.getKeys()[1] == true) {
+			if(currKeys[1] == true) {
 				p1 = new Player(p);
 				p1.setX(pX - 4);
 				p1.setPlayerHitbox();
@@ -50,7 +48,7 @@ public class GameState implements Serializable {
 				}
 				
 			}
-			if(input.getKeys()[2] == true) {
+			if(currKeys[2] == true) {
 				p1 = new Player(p);
 				p1.setY(pY + 4);
 				p1.setPlayerHitbox();
@@ -59,7 +57,7 @@ public class GameState implements Serializable {
 				}
 				
 			}
-			if(input.getKeys()[3] == true) {
+			if(currKeys[3] == true) {
 				p1 = new Player(p);
 				p1.setX(pX + 4);
 				p1.setPlayerHitbox();
@@ -68,28 +66,32 @@ public class GameState implements Serializable {
 				}
 			}
 			
-			if(input.getKeys()[4] == true) {
+			if(currKeys[4] == true) {
 				bullets.add(new Bullet(p.getX(), p.getY(), 0, -12, 5, 0));
 			}
-			else if(input.getKeys()[5] == true) {
+			else if(currKeys[5] == true) {
 				bullets.add(new Bullet(p.getX(), p.getY(), 0, 12, 5, 0));
 			}
-			else if(input.getKeys()[6] == true) {
+			else if(currKeys[6] == true) {
 				bullets.add(new Bullet(p.getX(), p.getY(), -12, 0, 5, 0));
 			}
-			else if(input.getKeys()[7] == true) {
+			else if(currKeys[7] == true) {
 				bullets.add(new Bullet(p.getX(), p.getY(), 12, 0, 5, 0));
-			}
+			}		
+		}
+	
+		
 			
 			
-			for(int i = 0; i < this.bullets.size(); i++) {
-				Bullet b = this.bullets.get(i);
-				b.setX(b.getX() + b.getVelX());
-				b.setY(b.getY() + b.getVelY());
-				if(map.bulletCollides(b)) {
-					this.bullets.remove(b);
-				}
+			
+		for(int i = 0; i < this.bullets.size(); i++) {
+			Bullet b = this.bullets.get(i);
+			b.setX(b.getX() + b.getVelX());
+			b.setY(b.getY() + b.getVelY());
+			if(map.bulletCollides(b)) {
+				this.bullets.remove(b);
 			}
+		}
 			
 			
 			
@@ -99,8 +101,10 @@ public class GameState implements Serializable {
 			
 	}	
 		
-		
-	
+	//LOTS OF WORK NEEDED. TEAMS, CONSISTENT SIZE, SPAWNPOINT
+	public void createPlayer(SocketAddress add) {
+		this.players.add(new Player(200,200, 30, 0, add));
+	}
 	
 	public void addPlayer(Player player) {
 		players.add(player);
@@ -111,23 +115,18 @@ public class GameState implements Serializable {
 	public ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
-	public InputHandle getInput() {
-		return input;
-	}
 	public ArrayList<Player> getPlayers() {
 		return players;
+	}
+	public Map getMap() {
+		return map;
 	}
 	
 	public void setEqualTo(GameState gs) {
 		this.players = gs.players;
 		this.bullets = gs.bullets;
 		this.map = gs.map;
-		System.out.println("Gamestate updated");
 	}
-	public Map getMap() {
-		return map;
-	}
-	
 	
 	
 	

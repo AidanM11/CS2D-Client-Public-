@@ -11,10 +11,12 @@ public class Main {
 	
 	public static void main(String[] args) {
 		//Create input handle and give it to gamestate constuctor as arg
+		map = new Map();
+		map.loadMap();
 		input = new InputHandle();
-		gamestate = new GameState(input, map);
+		gamestate = new GameState(map);
 		render = new Renderer(gamestate, input, map);
-		conn = new ConnectionHandler("10.2.23.137", 61447, input);
+		conn = new ConnectionHandler("10.2.23.137", 62036, input);
 		System.out.println("threads running");
 		conn.start();
 		System.out.println("threads running");
@@ -24,6 +26,7 @@ public class Main {
 	
 	public static void setGameState(GameState argGameState) {
 		gamestate.setEqualTo(argGameState);
+		System.out.println("updating gamestate");
 	}
 	public static GameState getGameState() {
 		return gamestate;

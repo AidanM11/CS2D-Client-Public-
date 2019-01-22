@@ -19,9 +19,10 @@ public class ConnectionReceiveHandler extends Thread{
 		GameState recGameState = Main.getGameState();
 		byte[] bytes;
 		while(true) {
-			bytes = new byte[1024];
+			bytes = new byte[999999];
 			packet = new DatagramPacket(bytes, bytes.length);
 			try {
+				System.out.println("waiting for packet");
 				socket.receive(packet);
 				System.out.println("packet received");
 			} catch (IOException e) {
@@ -31,6 +32,7 @@ public class ConnectionReceiveHandler extends Thread{
 			baIn = new ByteArrayInputStream(packet.getData());
 			try {
 				objIn = new ObjectInputStream(baIn);
+				System.out.println(packet.getData().length);
 				recGameState = (GameState) objIn.readObject();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

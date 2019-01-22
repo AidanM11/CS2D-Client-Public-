@@ -28,7 +28,7 @@ public class Renderer extends Thread {
 			
 			
 			try {
-				Thread.sleep(10);
+				Thread.sleep(16);
 				
 			}catch(Exception e) {}
 			

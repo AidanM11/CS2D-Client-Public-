@@ -56,9 +56,13 @@ public class ConnectionSendingHandler extends Thread{
 				data = baOut.toByteArray();
 				packet = new DatagramPacket(data, data.length, inet, port);
 				socket.send(packet);
+				Thread.sleep(16);
 				
 				
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

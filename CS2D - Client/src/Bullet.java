@@ -1,6 +1,7 @@
 import java.awt.*;
+import java.io.Serializable;
 
-public class Bullet {
+public class Bullet implements Serializable{
 
 	private int x,y,velX, velY, bulletSize,bulletID;
 	private Rectangle bullethitbox;

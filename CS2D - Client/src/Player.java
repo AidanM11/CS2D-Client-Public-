@@ -1,18 +1,22 @@
 import java.awt.*;
+import java.io.Serializable;
+import java.net.InetAddress;
+import java.net.SocketAddress;
 
-public class Player {
+public class Player implements Serializable{
 
 	private int x, y, size, playerID;
 	private int team;
+	private SocketAddress address;
 	private Rectangle playerhitbox;
 	
-	public Player(int x, int y, int size, int team, int playerID) {
+	public Player(int x, int y, int size, int team, SocketAddress address) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.size = size;
-		this.playerID = playerID;
 		this.team = team;
+		this.address = address;
 		playerhitbox = new Rectangle(getX(),getY(),size,size);
 		
 	}
@@ -57,6 +61,16 @@ public class Player {
 		playerhitbox.setBounds(getX(), getY(), size, size);
 		
 	}
+	public int getTeam() {
+		return team;
+	}
+	public SocketAddress getAddress() {
+		return address;
+	}
+	public Rectangle getPlayerhitbox() {
+		return playerhitbox;
+	}
+	
 	
 	
 	
