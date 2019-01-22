@@ -22,7 +22,7 @@ public class ConnectionHandler extends Thread{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		connSend = new ConnectionSendingHandler(socket, port, input);
+		connSend = new ConnectionSendingHandler(socket, port, input, remoteHost);
 		connRec = new ConnectionReceiveHandler(socket);
 		connSend.start();
 		connRec.start();

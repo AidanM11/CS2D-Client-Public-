@@ -19,7 +19,7 @@ public class ConnectionSendingHandler extends Thread{
 	private InetAddress inet;
 	private DatagramSocket socket;
 	
-	public ConnectionSendingHandler(DatagramSocket socket, int port, InputHandle input) {
+	public ConnectionSendingHandler(DatagramSocket socket, int port, InputHandle input, String remoteHost) {
 		super();
 		this.remoteHost = remoteHost;
 		this.socket = socket;
