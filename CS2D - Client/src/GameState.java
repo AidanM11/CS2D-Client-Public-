@@ -1,3 +1,7 @@
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.Serializable;
 import java.net.SocketAddress;
 import java.util.ArrayList;
@@ -27,8 +31,8 @@ public class GameState implements Serializable {
 			Player p = getPlayers().get(i);
 			Player p1;
 			boolean[] currKeys = keys.get(p.getAddress());
-			int pY = getPlayers().get(0).getY();
-			int pX = getPlayers().get(0).getX();
+			int pY = getPlayers().get(i).getY();
+			int pX = getPlayers().get(i).getX();
 			if(currKeys[0] == true) {
 				p1 = new Player(p);
 				p1.setY(pY - 4);
@@ -126,6 +130,65 @@ public class GameState implements Serializable {
 		this.players = gs.players;
 		this.bullets = gs.bullets;
 		this.map = gs.map;
+		System.out.println(this.players.size());
+	}
+	
+	
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
+	}
+	public void setBullets(ArrayList<Bullet> bullets) {
+		this.bullets = bullets;
+	}
+	public static byte[] serialize(GameState gamestate) {
+		ByteArrayOutputStream baOut = new ByteArrayOutputStream();
+		DataOutputStream dataOut = new DataOutputStream(baOut);
+		try {
+			dataOut.writeInt(gamestate.players.size());
+			for(int i = 0; i < gamestate.players.size(); i++) {
+				Player p = gamestate.players.get(i);
+				dataOut.writeInt(p.getX());
+				dataOut.writeInt(p.getY());
+				dataOut.writeInt(p.getTeam());
+			}
+			dataOut.writeInt(gamestate.bullets.size());
+			for(int i = 0; i < gamestate.bullets.size(); i++) {
+				Bullet b = gamestate.bullets.get(i);
+				dataOut.writeInt(b.getX());
+				dataOut.writeInt(b.getY());
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return baOut.toByteArray();
+	}
+	
+	public static GameState deserialize(byte[] data) {
+		ByteArrayInputStream baIn = new ByteArrayInputStream(data);
+		DataInputStream dataIn = new DataInputStream(baIn);
+		GameState newState = new GameState(Main.getGameState().map);
+		try {
+			int playerNum = dataIn.readInt();
+			System.out.println(playerNum);
+			for(int i = 0; i < playerNum; i++) {
+				int x = dataIn.readInt();
+				int y = dataIn.readInt();
+				int team = dataIn.readInt();
+				newState.addPlayer(new Player(x,y,30,team,null));
+				System.out.println(x+ " " + y+ " " + team );
+			}
+			int bulletsNum = dataIn.readInt();
+			for(int i = 0; i < bulletsNum; i++) {
+				int x = dataIn.readInt();
+				int y = dataIn.readInt();
+				newState.addBullet(new Bullet(x,y, 0, 0, 4, 0));
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return newState;
 	}
 	
 	

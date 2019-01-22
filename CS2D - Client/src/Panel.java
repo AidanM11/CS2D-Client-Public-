@@ -41,6 +41,12 @@ public class Panel extends JPanel{
 		for(int i = 0; i < gamestate.getBullets().size(); i++) {
 			drawBullet(g, gamestate.getBullets().get(i));
 		}
+		try {
+			Thread.sleep(16);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		

@@ -16,7 +16,7 @@ public class Main {
 		input = new InputHandle();
 		gamestate = new GameState(map);
 		render = new Renderer(gamestate, input, map);
-		conn = new ConnectionHandler("1010101010", 55408, input);
+		conn = new ConnectionHandler("10.2.22.73", 55500, input);
 		System.out.println("threads running");
 		conn.start();
 		System.out.println("threads running");

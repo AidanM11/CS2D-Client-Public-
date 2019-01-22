@@ -1,4 +1,5 @@
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.SocketException;
 
 public class ConnectionHandler extends Thread{
@@ -22,7 +23,7 @@ public class ConnectionHandler extends Thread{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		connSend = new ConnectionSendingHandler(socket, port, input, remoteHost);
+		connSend = new ConnectionSendingHandler(socket, port, input, this.remoteHost);
 		connRec = new ConnectionReceiveHandler(socket);
 		connSend.start();
 		connRec.start();

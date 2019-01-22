@@ -16,10 +16,10 @@ public class ConnectionReceiveHandler extends Thread{
 	
 	public void run() {
 		DatagramPacket packet;
-		GameState recGameState = Main.getGameState();
+		GameState recGameState;
 		byte[] bytes;
 		while(true) {
-			bytes = new byte[999999];
+			bytes = new byte[9999999];
 			packet = new DatagramPacket(bytes, bytes.length);
 			try {
 				System.out.println("waiting for packet");
@@ -29,18 +29,7 @@ public class ConnectionReceiveHandler extends Thread{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			baIn = new ByteArrayInputStream(packet.getData());
-			try {
-				objIn = new ObjectInputStream(baIn);
-				System.out.println(packet.getData().length);
-				recGameState = (GameState) objIn.readObject();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			recGameState = GameState.deserialize(packet.getData());
 			Main.setGameState(recGameState);
 		}
 	}
