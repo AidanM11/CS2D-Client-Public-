@@ -95,6 +95,22 @@ public class GameState implements Serializable {
 			if(map.bulletCollides(b)) {
 				this.bullets.remove(b);
 			}
+			for(int pInd = 0; pInd < players.size(); i++) {
+				Player p = players.get(pInd);
+				if(p.getPlayerHitbox().intersects(b.getBulletHitbox())) {
+					this.bullets.remove(b);
+					this.playerHit(p);
+				}
+			}
+		}
+		
+		for( int i = 0; i < this.players.size(); i++) {
+			Player p = players.get(i);
+			if(p.getHealth() <= 0) {
+				p.setX(200);
+				p.setY(200);
+				p.setHealth(10);
+			}
 		}
 			
 			
@@ -104,6 +120,10 @@ public class GameState implements Serializable {
 			
 			
 	}	
+	
+	public void playerHit(Player p) {
+		p.setHealth(p.getHealth() - 1);
+	}
 		
 	//LOTS OF WORK NEEDED. TEAMS, CONSISTENT SIZE, SPAWNPOINT
 	public void createPlayer(SocketAddress add) {
@@ -182,7 +202,7 @@ public class GameState implements Serializable {
 			for(int i = 0; i < bulletsNum; i++) {
 				int x = dataIn.readInt();
 				int y = dataIn.readInt();
-				newState.addBullet(new Bullet(x,y, 0, 0, 4, 0));
+				newState.addBullet(new Bullet(x,y, 0, 0, 0, 0));
 			}
 		}
 		catch(Exception e) {
