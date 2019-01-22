@@ -7,6 +7,7 @@ public class Player implements Serializable{
 
 	private int x, y, size, playerID;
 	private int team;
+	private int health;
 	private SocketAddress address;
 	private Rectangle playerhitbox;
 	
@@ -17,6 +18,7 @@ public class Player implements Serializable{
 		this.size = size;
 		this.team = team;
 		this.address = address;
+		this.health = 15;
 		playerhitbox = new Rectangle(getX(),getY(),size,size);
 		
 	}
@@ -70,6 +72,13 @@ public class Player implements Serializable{
 	public Rectangle getPlayerhitbox() {
 		return playerhitbox;
 	}
+	public int getHealth() {
+		return health;
+	}
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	
 	
 	
 	
