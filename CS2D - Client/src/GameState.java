@@ -82,6 +82,8 @@ public class GameState implements Serializable {
 			else if(currKeys[7] == true) {
 				bullets.add(new Bullet(p.getX(), p.getY(), 12, 0, 5, p));
 			}		
+			
+			p.setPlayerHitbox();
 		}
 	
 		
