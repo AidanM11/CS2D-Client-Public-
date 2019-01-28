@@ -1,5 +1,8 @@
 import java.awt.Graphics;
 
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 public class Renderer extends Thread {
 	
 	private Frame frame;
@@ -7,6 +10,7 @@ public class Renderer extends Thread {
 	private GameState gamestate;
 	private Map map;
 	private InputHandle input;
+	private String port;
 	
 	public Renderer(GameState gamestate, InputHandle input, Map map) {
 		super();
@@ -15,6 +19,7 @@ public class Renderer extends Thread {
 		this.map = map;
 		panel = new Panel(this.gamestate, map);
 		this.input = input;
+		
 	}
 	
 	public void run() {
@@ -35,6 +40,15 @@ public class Renderer extends Thread {
 		}
 			
 	}
+
+	public Frame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(Frame frame) {
+		this.frame = frame;
+	}
+	
 	
 	
 	

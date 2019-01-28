@@ -1,3 +1,4 @@
+import javax.swing.JOptionPane;
 
 public class Main {
 	
@@ -6,6 +7,8 @@ public class Main {
   	private static InputHandle input;
   	private static Map map;
   	private static ConnectionHandler conn;
+  	private static String ip;
+  	private static String port;
 
   
 	
@@ -16,7 +19,9 @@ public class Main {
 		input = new InputHandle();
 		gamestate = new GameState(map);
 		render = new Renderer(gamestate, input, map);
-		conn = new ConnectionHandler("10.2.22.73", 55500, input);
+		port = JOptionPane.showInputDialog(render.getFrame().getContentPane(), "Enter Port Number:");
+		ip = JOptionPane.showInputDialog(render.getFrame().getContentPane(), "Enter IP Number:");
+		conn = new ConnectionHandler(ip, Integer.parseInt(port), input);
 		System.out.println("threads running");
 		conn.start();
 		System.out.println("threads running");
