@@ -69,7 +69,7 @@ public class Panel extends JPanel{
 				block = map.getBlock()[y][x];
 				
 				//g.fillRect(centerWidth + (x * blockSize),centerHeight + (y * blockSize), blockSize, blockSize);
-				g.drawImage(tileset_skins[block.getBlockID()] 	,centerWidth + (x * blockSize),centerHeight + (y * blockSize), blockSize, blockSize, null);
+				g.drawImage(tileset_skins[block.getBlockID()], centerWidth + (x * blockSize), centerHeight + (y * blockSize), blockSize, blockSize, null);
 				//g.setColor(Color.RED);
 				//g.drawRect(centerWidth + (block.getHitbox().x), centerHeight + (block.getHitbox().y), block.getHitbox().width, block.getHitbox().height);
 		}

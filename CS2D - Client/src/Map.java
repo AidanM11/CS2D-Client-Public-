@@ -1,6 +1,9 @@
 
 import java.awt.Graphics;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 
 public class Map implements Serializable {
@@ -32,8 +35,9 @@ public class Map implements Serializable {
 	
 	public void loadMap() {
 		Save save = new Save(this, blockSize);
-		File file = new File(Map.class.getClassLoader().getResource("save1.txt").getFile());
-		block = save.loadSave(new File("save/save1.txt"));
+		InputStream in = Map.class.getClassLoader().getResourceAsStream("save1.txt");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		block = save.loadSave(reader);
 	}
 
 	public int getMapHeight() {
