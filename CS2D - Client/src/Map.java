@@ -1,3 +1,4 @@
+
 import java.awt.Graphics;
 import java.io.File;
 import java.io.Serializable;
@@ -31,6 +32,7 @@ public class Map implements Serializable {
 	
 	public void loadMap() {
 		Save save = new Save(this, blockSize);
+		File file = new File(Map.class.getClassLoader().getResource("save1.txt").getFile());
 		block = save.loadSave(new File("save/save1.txt"));
 	}
 

@@ -1,7 +1,10 @@
 import java.awt.*;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -24,7 +27,13 @@ public class Panel extends JPanel{
 		tileset_skins = new Image[100];
 		
 		for(int i = 0; i<tileset_skins.length;i++) {
-			tileset_skins[i] = new ImageIcon("res/tileset_skins.png").getImage();
+			InputStream input = Panel.class.getClassLoader().getResourceAsStream("tileset_skins.png");
+			try {
+				tileset_skins[i] = ImageIO.read(input);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			tileset_skins[i] = createImage(new FilteredImageSource(tileset_skins[i].getSource(), new CropImageFilter(0,25 * i, 25,25)));
 			
 		}
