@@ -204,7 +204,8 @@ public class GameState implements Serializable {
 			for(int i = 0; i < bulletsNum; i++) {
 				int x = dataIn.readInt();
 				int y = dataIn.readInt();
-				newState.addBullet(new Bullet(x,y, 0, 0, 4, null));
+				int size = dataIn.readInt();
+				newState.addBullet(new Bullet(x,y, 0, 0, size, null));
 			}
 		}
 		catch(Exception e) {

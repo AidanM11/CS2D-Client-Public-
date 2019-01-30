@@ -80,7 +80,12 @@ public class Panel extends JPanel{
 	public void drawPlayer(Graphics g, Player player) {
 		int centerWidth = (this.getWidth()/2) - (map.getMapWidth() * blockSize / 2);
 		int centerHeight = (this.getHeight()/2) - (map.getMapHeight() * blockSize / 2);
-		g.setColor(Color.ORANGE);
+		if(player.getTeam() == 0 ) {
+			g.setColor(Color.RED);
+		}
+		else {
+			g.setColor(Color.BLUE);
+		}
 		g.fillRect(player.getX() + centerWidth,player.getY() + centerHeight,player.getSize(),player.getSize());
 		player.setPlayerHitbox();
 		//g.setColor(Color.GREEN);
