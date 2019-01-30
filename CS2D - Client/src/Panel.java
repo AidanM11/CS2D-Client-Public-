@@ -87,6 +87,11 @@ public class Panel extends JPanel{
 			g.setColor(Color.BLUE);
 		}
 		g.fillRect(player.getX() + centerWidth,player.getY() + centerHeight,player.getSize(),player.getSize());
+		if(player.isReloading()) {
+			g.setColor(Color.BLACK);
+			g.setFont(new Font("TimesRoman", Font.BOLD, 40));
+			g.drawString("R", player.getX() + centerWidth, player.getY() + player.getSize() + centerHeight);
+		}
 		player.setPlayerHitbox();
 		//g.setColor(Color.GREEN);
 		//g.drawRect(player.getPlayerHitbox().x, player.getPlayerHitbox().y, player.getPlayerHitbox().width, player.getPlayerHitbox().height);

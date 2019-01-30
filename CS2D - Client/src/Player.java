@@ -10,8 +10,9 @@ public class Player implements Serializable{
 	private int health;
 	private SocketAddress address;
 	private Rectangle playerhitbox;
+	private boolean reloading;
 	
-	public Player(int x, int y, int size, int team, SocketAddress address) {
+	public Player(int x, int y, int size, int team, SocketAddress address, boolean reloading) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -19,9 +20,11 @@ public class Player implements Serializable{
 		this.team = team;
 		this.address = address;
 		this.health = 15;
+		this.reloading = reloading;
 		playerhitbox = new Rectangle(getX(),getY(),size,size);
 		
 	}
+	
 	public Player (Player player) {
 		this.x = player.getX();
 		this.y = player.getY();
@@ -78,6 +81,13 @@ public class Player implements Serializable{
 	public void setHealth(int health) {
 		this.health = health;
 	}
+	public boolean isReloading() {
+		return reloading;
+	}
+	public void setReloading(boolean reloading) {
+		this.reloading = reloading;
+	}
+	
 	
 	
 	

@@ -129,7 +129,7 @@ public class GameState implements Serializable {
 		
 	//LOTS OF WORK NEEDED. TEAMS, CONSISTENT SIZE, SPAWNPOINT
 	public void createPlayer(SocketAddress add) {
-		this.players.add(new Player(200,200, 30, 0, add));
+		this.players.add(new Player(200,200, 30, 0, add, false));
 	}
 	
 	public void addPlayer(Player player) {
@@ -197,7 +197,15 @@ public class GameState implements Serializable {
 				int x = dataIn.readInt();
 				int y = dataIn.readInt();
 				int team = dataIn.readInt();
-				newState.addPlayer(new Player(x,y,30,team,null));
+				int reloadingInt = dataIn.readInt();
+				boolean reloading = false;
+				if(reloadingInt == 1) {
+					reloading = true;
+				}
+				else if(reloadingInt == 0) {
+					reloading = false;
+				}
+				newState.addPlayer(new Player(x,y,30,team,null,reloading));
 				System.out.println(x+ " " + y+ " " + team );
 			}
 			int bulletsNum = dataIn.readInt();
