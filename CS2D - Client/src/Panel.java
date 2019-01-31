@@ -94,8 +94,8 @@ public class Panel extends JPanel{
 			g.drawString("R", player.getX() + centerWidth, player.getY() + player.getSize() + centerHeight);
 		}
 		player.setPlayerHitbox();
-		g.setColor(Color.GREEN);
-		g.drawRect(player.getPlayerHitbox().x, player.getPlayerHitbox().y, player.getPlayerHitbox().width, player.getPlayerHitbox().height);
+		//g.setColor(Color.GREEN);
+		//g.drawRect(player.getPlayerHitbox().x, player.getPlayerHitbox().y, player.getPlayerHitbox().width, player.getPlayerHitbox().height);
 		
 	}
 	
