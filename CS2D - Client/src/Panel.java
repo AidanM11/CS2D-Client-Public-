@@ -86,6 +86,7 @@ public class Panel extends JPanel{
 		else {
 			teamVal = 4;
 		}
+		
 		g.drawImage(tileset_skins[teamVal],player.getX() + centerWidth,player.getY() + centerHeight,player.getSize(),player.getSize(),null);
 		if(player.isReloading()) {
 			g.setColor(Color.BLACK);
@@ -93,8 +94,8 @@ public class Panel extends JPanel{
 			g.drawString("R", player.getX() + centerWidth, player.getY() + player.getSize() + centerHeight);
 		}
 		player.setPlayerHitbox();
-		//g.setColor(Color.GREEN);
-		//g.drawRect(player.getPlayerHitbox().x, player.getPlayerHitbox().y, player.getPlayerHitbox().width, player.getPlayerHitbox().height);
+		g.setColor(Color.GREEN);
+		g.drawRect(player.getPlayerHitbox().x, player.getPlayerHitbox().y, player.getPlayerHitbox().width, player.getPlayerHitbox().height);
 		
 	}
 	
