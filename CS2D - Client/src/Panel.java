@@ -14,7 +14,7 @@ public class Panel extends JPanel{
 	private Map map;
 	private int blockSize;
 	private Image[] tileset_skins;
-	
+	private int teamVal;
 	
 	
 	public Panel(GameState gamestate, Map map) {
@@ -81,12 +81,12 @@ public class Panel extends JPanel{
 		int centerWidth = (this.getWidth()/2) - (map.getMapWidth() * blockSize / 2);
 		int centerHeight = (this.getHeight()/2) - (map.getMapHeight() * blockSize / 2);
 		if(player.getTeam() == 0 ) {
-			g.setColor(Color.RED);
+			teamVal = 5;
 		}
 		else {
-			g.setColor(Color.BLUE);
+			teamVal = 4;
 		}
-		g.fillRect(player.getX() + centerWidth,player.getY() + centerHeight,player.getSize(),player.getSize());
+		g.drawImage(tileset_skins[teamVal],player.getX() + centerWidth,player.getY() + centerHeight,player.getSize(),player.getSize(),null);
 		if(player.isReloading()) {
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("TimesRoman", Font.BOLD, 40));
