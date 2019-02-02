@@ -186,11 +186,33 @@ public class GameState implements Serializable {
 		return baOut.toByteArray();
 	}
 	
+	public static byte[] serializeMap(GameState gamestate) {
+		ByteArrayOutputStream baOut = new ByteArrayOutputStream();
+		DataOutputStream dataOut = new DataOutputStream(baOut);
+		try {
+			dataOut.writeInt(gamestate.getMap().getMapHeight());
+			dataOut.writeInt(gamestate.getMap().getMapWidth());
+			for(int y = 0; y < gamestate.getMap().getMapHeight(); y++) {
+				for(int x = 0; x < gamestate.getMap().getMapWidth(); x++) {
+					dataOut.writeInt(gamestate.getMap().getBlock()[y][x].getBlockID());
+				}
+			}
+			
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return baOut.toByteArray();
+	}
+	
 	public static GameState deserialize(byte[] data) {
 		ByteArrayInputStream baIn = new ByteArrayInputStream(data);
 		DataInputStream dataIn = new DataInputStream(baIn);
 		GameState newState = new GameState(Main.getGameState().map);
 		try {
+			//flush packet type
+			dataIn.readInt();
 			int playerNum = dataIn.readInt();
 			System.out.println(playerNum);
 			for(int i = 0; i < playerNum; i++) {
@@ -221,6 +243,34 @@ public class GameState implements Serializable {
 		}
 		return newState;
 	}
+	public static Map deserializeMap(byte[] data) {
+		ByteArrayInputStream baIn = new ByteArrayInputStream(data);
+		DataInputStream dataIn = new DataInputStream(baIn);
+		Map newMap = new Map();
+		newMap.createDefaultMap();
+		try {
+			//flush packet type
+			dataIn.readInt();
+			int height = dataIn.readInt();
+			int width = dataIn.readInt();
+			newMap = new Map(width, height);
+			for(int y = 0; y < newMap.getMapHeight(); y++) {
+				for(int x = 0; x < newMap.getMapWidth(); x++) {
+					newMap.getBlock()[y][x] = new Block(x, y, newMap.getBlockSize(), dataIn.readInt());
+				}
+			}
+			
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return newMap;
+	}
+	public void setMap(Map map) {
+		this.map = map;
+	}
+	
 	
 	
 	

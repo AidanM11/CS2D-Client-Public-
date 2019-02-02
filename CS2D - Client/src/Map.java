@@ -23,6 +23,12 @@ public class Map implements Serializable {
 		this.blockSize = 30;
 		block = new Block[mapWidth][mapHeight];
 	}
+	public Map(int width, int height) {
+		this.mapHeight = height;
+		this.mapWidth = width;
+		this.blockSize = 30;
+		block = new Block[mapWidth][mapHeight];
+	}
 	
 	public void createDefaultMap() {
 		
@@ -76,6 +82,16 @@ public class Map implements Serializable {
 		}
 		return false;
 	}
+
+	public int getBlockSize() {
+		return blockSize;
+	}
+
+	public void setBlockSize(int blockSize) {
+		this.blockSize = blockSize;
+	}
+	
+	
 
 	
 	

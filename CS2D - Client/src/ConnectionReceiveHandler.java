@@ -1,4 +1,5 @@
 import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.DatagramPacket;
@@ -17,6 +18,7 @@ public class ConnectionReceiveHandler extends Thread{
 	public void run() {
 		DatagramPacket packet;
 		GameState recGameState;
+		Map recMap;
 		byte[] bytes;
 		while(true) {
 			bytes = new byte[9999999];
@@ -29,8 +31,24 @@ public class ConnectionReceiveHandler extends Thread{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			recGameState = GameState.deserialize(packet.getData());
-			Main.setGameState(recGameState);
+			
+			ByteArrayInputStream baIn = new ByteArrayInputStream(packet.getData());
+			DataInputStream dataIn = new DataInputStream(baIn);
+			int packetType = 0;
+			try {
+				packetType = dataIn.readInt();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(packetType == 0) {
+				recGameState = GameState.deserialize(packet.getData());
+				Main.setGameState(recGameState);
+			}
+			else if(packetType == 1) {
+				recMap = GameState.deserializeMap(packet.getData());
+				Main.getGameState().setMap(recMap);
+			}
 		}
 	}
 }
