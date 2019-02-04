@@ -219,6 +219,7 @@ public class GameState implements Serializable {
 				int x = dataIn.readInt();
 				int y = dataIn.readInt();
 				int team = dataIn.readInt();
+				int rotation = dataIn.readInt();
 				int reloadingInt = dataIn.readInt();
 				boolean reloading = false;
 				if(reloadingInt == 1) {
@@ -227,7 +228,9 @@ public class GameState implements Serializable {
 				else if(reloadingInt == 0) {
 					reloading = false;
 				}
-				newState.addPlayer(new Player(x,y,30,team,null,reloading));
+				Player p = new Player(x,y,30,team,null,reloading);
+				p.setRotation(rotation);
+				newState.addPlayer(p);
 				System.out.println(x+ " " + y+ " " + team );
 			}
 			int bulletsNum = dataIn.readInt();
