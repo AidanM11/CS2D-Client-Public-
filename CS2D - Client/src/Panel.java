@@ -104,13 +104,13 @@ public class Panel extends JPanel{
 		if(player.getTeam() == 1 && player.getRotation() == 0) {
 			teamVal = 4;
 		}
-		if(player.getTeam() == 0 && player.getRotation() == 1) {
+		if(player.getTeam() == 1 && player.getRotation() == 1) {
 			teamVal = 13;
 		}
-		if(player.getTeam() == 0 && player.getRotation() == 2) {
+		if(player.getTeam() == 1 && player.getRotation() == 2) {
 			teamVal = 12;
 		}
-		if(player.getTeam() == 0 && player.getRotation() == 3) {
+		if(player.getTeam() == 1 && player.getRotation() == 3) {
 			teamVal = 11;
 		}
 		
