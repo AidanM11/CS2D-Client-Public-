@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.io.IOException;
@@ -77,17 +79,44 @@ public class Panel extends JPanel{
 }
 	
 	
-	public void drawPlayer(Graphics g, Player player) {
+	public void drawPlayer(Graphics g, Player player) { 
+	
+		
 		int centerWidth = (this.getWidth()/2) - (map.getMapWidth() * blockSize / 2);
 		int centerHeight = (this.getHeight()/2) - (map.getMapHeight() * blockSize / 2);
-		if(player.getTeam() == 0 ) {
+		
+		
+		if(player.getTeam() == 0 && player.getRotation() == 0) {
 			teamVal = 5;
 		}
-		else {
-			teamVal = 4;
+		if(player.getTeam() == 0 && player.getRotation() == 1) {
+			teamVal = 10;
+		}
+		if(player.getTeam() == 0 && player.getRotation() == 2) {
+			teamVal = 9;
+		}
+		if(player.getTeam() == 0 && player.getRotation() == 3) {
+			teamVal = 8;
 		}
 		
+		
+		
+		if(player.getTeam() == 1 && player.getRotation() == 0) {
+			teamVal = 4;
+		}
+		if(player.getTeam() == 0 && player.getRotation() == 1) {
+			teamVal = 13;
+		}
+		if(player.getTeam() == 0 && player.getRotation() == 2) {
+			teamVal = 12;
+		}
+		if(player.getTeam() == 0 && player.getRotation() == 3) {
+			teamVal = 11;
+		}
+		
+		
 		g.drawImage(tileset_skins[teamVal],player.getX() + centerWidth,player.getY() + centerHeight,player.getSize(),player.getSize(),null);
+		
 		if(player.isReloading()) {
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("TimesRoman", Font.BOLD, 40));
@@ -108,4 +137,11 @@ public class Panel extends JPanel{
 		
 		
 	}
+	
+	
+	
+	
+	
+
+
 }
