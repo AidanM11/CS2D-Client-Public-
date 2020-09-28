@@ -3,7 +3,7 @@ import java.awt.event.KeyListener;
 
 public class InputHandle implements KeyListener{
 
-	private boolean[] Keys = new boolean[8];
+	private boolean[] Keys = new boolean[14];
 	private boolean active = false;
 
 	public void keyPressed(KeyEvent e) {
@@ -30,6 +30,24 @@ public class InputHandle implements KeyListener{
 		}
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			Keys[7] = true;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_1) {
+			Keys[8] = true;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_2) {
+			Keys[9] = true;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_3) {
+			Keys[10] = true;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_4) {
+			Keys[11] = true;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_5) {
+			Keys[12] = true;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_6) {
+			Keys[13] = true;
 		}
 		
 	}
@@ -58,6 +76,24 @@ public class InputHandle implements KeyListener{
 		}
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			Keys[7] = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_1) {
+			Keys[8] = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_2) {
+			Keys[9] = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_3) {
+			Keys[10] = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_4) {
+			Keys[11] = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_5) {
+			Keys[12] = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_6) {
+			Keys[13] = false;
 		}
 		
 	}

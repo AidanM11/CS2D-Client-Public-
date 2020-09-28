@@ -129,7 +129,7 @@ public class GameState implements Serializable {
 		
 	//LOTS OF WORK NEEDED. TEAMS, CONSISTENT SIZE, SPAWNPOINT
 	public void createPlayer(SocketAddress add) {
-		this.players.add(new Player(200,200, 30, 0, add, false));
+		this.players.add(new Player(200,200, 30, 0, add, false, false, 0, false));
 	}
 	
 	public void addPlayer(Player player) {
@@ -220,7 +220,10 @@ public class GameState implements Serializable {
 				int y = dataIn.readInt();
 				int team = dataIn.readInt();
 				int rotation = dataIn.readInt();
+				int money = dataIn.readInt();
+				int isMeInt = dataIn.readInt();
 				int reloadingInt = dataIn.readInt();
+				int deadInt = dataIn.readInt();
 				boolean reloading = false;
 				if(reloadingInt == 1) {
 					reloading = true;
@@ -228,7 +231,21 @@ public class GameState implements Serializable {
 				else if(reloadingInt == 0) {
 					reloading = false;
 				}
-				Player p = new Player(x,y,30,team,null,reloading);
+				boolean isMe = false;
+				if(isMeInt == 1) {
+					isMe = true;
+				}
+				else if (isMeInt == 0) {
+					isMe = false;
+				}
+				boolean dead = false;
+				if(deadInt == 1) {
+					dead = true;
+				}
+				else if (deadInt == 0) {
+					dead = false;
+				}
+				Player p = new Player(x,y,30,team,null,reloading,isMe,money,dead);
 				p.setRotation(rotation);
 				newState.addPlayer(p);
 				System.out.println(x+ " " + y+ " " + team );
@@ -272,6 +289,14 @@ public class GameState implements Serializable {
 	}
 	public void setMap(Map map) {
 		this.map = map;
+	}
+	public Player getMe() {
+		for(int i = 0; i < this.players.size(); i++) {
+			if(this.players.get(i).isMe()) {
+				return this.players.get(i);
+			}
+		}
+		return null;
 	}
 	
 	

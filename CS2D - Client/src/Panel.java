@@ -75,12 +75,17 @@ public class Panel extends JPanel{
 				//g.setColor(Color.RED);
 				//g.drawRect(centerWidth + (block.getHitbox().x), centerHeight + (block.getHitbox().y), block.getHitbox().width, block.getHitbox().height);
 		}
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("TimesRoman", Font.BOLD, 40));
+		g.drawString("$" + Integer.toString(this.gamestate.getMe().getMoney()), 10, 50);
 	}
 }
 	
 	
 	public void drawPlayer(Graphics g, Player player) { 
-	
+		if(player.isDead()) {
+			return;
+		}
 		
 		int centerWidth = (this.getWidth()/2) - (map.getMapWidth() * blockSize / 2);
 		int centerHeight = (this.getHeight()/2) - (map.getMapHeight() * blockSize / 2);
@@ -90,10 +95,10 @@ public class Panel extends JPanel{
 			teamVal = 5;
 		}
 		if(player.getTeam() == 0 && player.getRotation() == 1) {
-			teamVal = 13;
+			teamVal = 12;
 		}
 		if(player.getTeam() == 0 && player.getRotation() == 2) {
-			teamVal = 12;
+			teamVal = 13;
 		}
 		if(player.getTeam() == 0 && player.getRotation() == 3) {
 			teamVal = 11;
@@ -105,10 +110,10 @@ public class Panel extends JPanel{
 			teamVal = 4;
 		}
 		if(player.getTeam() == 1 && player.getRotation() == 1) {
-			teamVal = 10;
+			teamVal = 9;
 		}
 		if(player.getTeam() == 1 && player.getRotation() == 2) {
-			teamVal = 9;
+			teamVal = 10;
 		}
 		if(player.getTeam() == 1 && player.getRotation() == 3) {
 			teamVal = 8;

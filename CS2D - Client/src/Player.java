@@ -11,8 +11,11 @@ public class Player implements Serializable{
 	private SocketAddress address;
 	private Rectangle playerhitbox;
 	private boolean reloading;
+	private boolean isMe;
+	private int money;
+	private boolean dead;
 	
-	public Player(int x, int y, int size, int team, SocketAddress address, boolean reloading) {
+	public Player(int x, int y, int size, int team, SocketAddress address, boolean reloading, boolean isMe, int money, boolean dead) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -22,6 +25,9 @@ public class Player implements Serializable{
 		this.health = 15;
 		this.rotation = 0;
 		this.reloading = reloading;
+		this.isMe = isMe;
+		this.money = money;
+		this.dead = dead;
 		playerhitbox = new Rectangle(getX(),getY(),size,size);
 		
 	}
@@ -96,6 +102,24 @@ public class Player implements Serializable{
 	public void setRotation(int rotation) {
 		this.rotation = rotation;
 	}
+
+	public boolean isMe() {
+		return isMe;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public boolean isDead() {
+		return dead;
+	}
+
+	public void setDead(boolean dead) {
+		this.dead = dead;
+	}
+	
+	
 	
 	
 	
